@@ -3,7 +3,7 @@
 # Copyright (c) 2015 Rafael Reis
 #
 """
-application module - Main module that trains and evaluate the model for the 
+application module - Main module that trains and evaluate the model for the
 Quotation Extraction Task
 
 """
@@ -17,7 +17,7 @@ from pkg_resources import resource_filename
 INPUT_TEST_FILE = resource_filename('qextractor', 'data/gen/qextractor_input_test.csv')
 
 def main():
-	"""Main function, that train and validade the model for the Quotation Extractor Task.
+    """Main function, that train and validade the model for the Quotation Extractor Task.
 
     """
     w = train.train()
