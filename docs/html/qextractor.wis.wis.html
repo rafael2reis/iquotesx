@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module qextractor.wis.wis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="qextractor.html"><font color="#ffffff">qextractor</font></a>.<a href="qextractor.wis.html"><font color="#ffffff">wis</font></a>.wis</strong></big></big> (version 1.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/rafaelreis/workspace/python/projetofinal/qextractor/wis/wis.py">/Users/rafaelreis/workspace/python/projetofinal/qextractor/wis/wis.py</a></font></td></tr></table>
+    <p><tt>wis&nbsp;module&nbsp;-&nbsp;Functions&nbsp;to&nbsp;solve&nbsp;de&nbsp;Weight&nbsp;Interval&nbsp;Schedule&nbsp;problem<br>
+&nbsp;<br>
+The&nbsp;core&nbsp;function&nbsp;is&nbsp;schedule,&nbsp;which&nbsp;receives&nbsp;an&nbsp;array&nbsp;of&nbsp;<a href="#Task">Task</a>&nbsp;as&nbsp;argument.<br>
+It&nbsp;uses&nbsp;a&nbsp;dynamic&nbsp;programming&nbsp;aproach&nbsp;in&nbsp;order&nbsp;to&nbsp;solve&nbsp;the&nbsp;problem&nbsp;(if&nbsp;<br>
+we&nbsp;assume&nbsp;that&nbsp;the&nbsp;tasks&nbsp;are&nbsp;ordered&nbsp;by&nbsp;end&nbsp;time).</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#tuple">builtins.tuple</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="qextractor.wis.wis.html#Task">Task</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Task">class <strong>Task</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Task">Task</a>(start,&nbsp;end,&nbsp;weight,&nbsp;index)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="qextractor.wis.wis.html#Task">Task</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Task-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;<a href="builtins.html#tuple">tuple</a>.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Task-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><tt>Exclude&nbsp;the&nbsp;OrderedDict&nbsp;from&nbsp;pickling</tt></dd></dl>
+
+<dl><dt><a name="Task-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Task-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Task-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Task">Task</a>&nbsp;object&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="Task-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x10022ad80&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Task">Task</a>&nbsp;object&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Task-__new__"><strong>__new__</strong></a>(_cls, start, end, weight, index)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Task">Task</a>(start,&nbsp;end,&nbsp;weight,&nbsp;index)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>A&nbsp;new&nbsp;OrderedDict&nbsp;mapping&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values</tt></dd>
+</dl>
+<dl><dt><strong>end</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;1</tt></dd>
+</dl>
+<dl><dt><strong>index</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;3</tt></dd>
+</dl>
+<dl><dt><strong>start</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<dl><dt><strong>weight</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;2</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>_fields</strong> = ('start', 'end', 'weight', 'index')</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(3), doc='Alias for field number 3')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Task-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Task-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Task-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Task-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Task-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Task-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Task-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Task-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Task-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Task-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Task-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-createPreviousArray"><strong>createPreviousArray</strong></a>(tasks)</dt><dd><tt>Creates&nbsp;the&nbsp;previous&nbsp;array&nbsp;for&nbsp;the&nbsp;WISP.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tasks:&nbsp;A&nbsp;list&nbsp;of&nbsp;tasks<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;Previous&nbsp;array</tt></dd></dl>
+ <dl><dt><a name="-previous"><strong>previous</strong></a>(i, tasks)</dt><dd><tt>Returns&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;task&nbsp;that&nbsp;ends&nbsp;before&nbsp;the&nbsp;start&nbsp;of&nbsp;task&nbsp;i.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i:&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;task<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tasks:&nbsp;A&nbsp;list&nbsp;of&nbsp;tasks<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;task&nbsp;previous&nbsp;of&nbsp;task&nbsp;i.</tt></dd></dl>
+ <dl><dt><a name="-schedule"><strong>schedule</strong></a>(tasks)</dt><dd><tt>Schedule&nbsp;compatible&nbsp;tasks&nbsp;with&nbsp;maximum&nbsp;weight.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tasks:&nbsp;Array&nbsp;of&nbsp;<a href="#Task">Task</a><br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="builtins.html#tuple">tuple</a>&nbsp;composed&nbsp;by&nbsp;the&nbsp;Maximum&nbsp;weight&nbsp;found<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;the&nbsp;set&nbsp;of&nbsp;compatible&nbsp;tasks.</tt></dd></dl>
+ <dl><dt><a name="-sortTasksByEnd"><strong>sortTasksByEnd</strong></a>(tasks)</dt><dd><tt>Sorts&nbsp;tasks&nbsp;by&nbsp;their&nbsp;end&nbsp;times.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tasks:&nbsp;A&nbsp;list&nbsp;of&nbsp;tasks<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;tasks&nbsp;sorted&nbsp;by&nbsp;end&nbsp;time.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Rafael&nbsp;Reis&nbsp;&lt;rafael2reis@gmail.com&gt;</td></tr></table>
+</body></html>

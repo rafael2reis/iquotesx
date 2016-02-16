@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module qextractor.preprocessing.baseline</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="qextractor.html"><font color="#ffffff">qextractor</font></a>.<a href="qextractor.preprocessing.html"><font color="#ffffff">preprocessing</font></a>.baseline</strong></big></big> (version 1.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/rafaelreis/workspace/python/projetofinal/qextractor/preprocessing/baseline.py">/Users/rafaelreis/workspace/python/projetofinal/qextractor/preprocessing/baseline.py</a></font></td></tr></table>
+    <p><tt>baseline&nbsp;module&nbsp;-&nbsp;Functions&nbsp;to&nbsp;produce&nbsp;the&nbsp;Baseline&nbsp;System's&nbsp;features.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-applyLabel"><strong>applyLabel</strong></a>(q, pattern, text, dic, group, offset, offDic, label)</dt></dl>
+ <dl><dt><a name="-boundedChunk"><strong>boundedChunk</strong></a>(s)</dt><dd><tt>Indetifies&nbsp;the&nbsp;Bounded&nbsp;Chunk.<br>
+&nbsp;<br>
+Assigns&nbsp;a&nbsp;1&nbsp;to&nbsp;the&nbsp;three&nbsp;quotation&nbsp;marks&nbsp;'&nbsp;"&nbsp;-&nbsp;and&nbsp;also&nbsp;to&nbsp;all&nbsp;<br>
+the&nbsp;tokens&nbsp;between&nbsp;them,&nbsp;whenever&nbsp;there&nbsp;are&nbsp;more&nbsp;than&nbsp;three&nbsp;<br>
+tokens&nbsp;between&nbsp;the&nbsp;quotation&nbsp;marks.&nbsp;Otherwise,&nbsp;assigns&nbsp;a&nbsp;0&nbsp;to&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s:&nbsp;2D&nbsp;array&nbsp;that&nbsp;represents&nbsp;a&nbsp;sentence&nbsp;in&nbsp;the&nbsp;GloboQuotes&nbsp;format<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;bounded&nbsp;chunk.</tt></dd></dl>
+ <dl><dt><a name="-convert"><strong>convert</strong></a>(a, s, transIndex, valueList, label)</dt><dd><tt>Given&nbsp;a&nbsp;1D&nbsp;array&nbsp;a,&nbsp;a&nbsp;2D&nbsp;sentence&nbsp;array&nbsp;s,&nbsp;sets<br>
+a[i]&nbsp;to&nbsp;label,&nbsp;where&nbsp;s[transIndex]&nbsp;in&nbsp;labelList</tt></dd></dl>
+ <dl><dt><a name="-convertNe"><strong>convertNe</strong></a>(a, s)</dt><dd><tt>Call&nbsp;the&nbsp;function&nbsp;convert&nbsp;with&nbsp;the&nbsp;parameters&nbsp;to&nbsp;translate&nbsp;the&nbsp;tokens<br>
+in&nbsp;the&nbsp;array&nbsp;a&nbsp;to&nbsp;"#PO#",&nbsp;whenever&nbsp;NE&nbsp;is&nbsp;in&nbsp;the&nbsp;valueList.</tt></dd></dl>
+ <dl><dt><a name="-convertProPess"><strong>convertProPess</strong></a>(a, s)</dt><dd><tt>Translates&nbsp;the&nbsp;tokens&nbsp;in&nbsp;the&nbsp;array&nbsp;a&nbsp;to&nbsp;"#PO#",&nbsp;whenever&nbsp;NE&nbsp;is&nbsp;in&nbsp;the&nbsp;valueList.</tt></dd></dl>
+ <dl><dt><a name="-convertQuotationStart"><strong>convertQuotationStart</strong></a>(a, qs)</dt><dd><tt>Call&nbsp;the&nbsp;function&nbsp;convert&nbsp;with&nbsp;the&nbsp;parameters&nbsp;to&nbsp;translate&nbsp;the&nbsp;tokens<br>
+in&nbsp;the&nbsp;array&nbsp;a&nbsp;to&nbsp;"#PO#",&nbsp;whenever&nbsp;NE&nbsp;is&nbsp;in&nbsp;the&nbsp;valueList.</tt></dd></dl>
+ <dl><dt><a name="-detoken"><strong>detoken</strong></a>(a)</dt><dd><tt>Detokenizes&nbsp;an&nbsp;array&nbsp;of&nbsp;tokens.<br>
+&nbsp;<br>
+Given&nbsp;an&nbsp;array&nbsp;a&nbsp;of&nbsp;tokens,&nbsp;it&nbsp;creates&nbsp;a&nbsp;text&nbsp;string&nbsp;with&nbsp;the&nbsp;tokens<br>
+separated&nbsp;by&nbsp;space&nbsp;and&nbsp;a&nbsp;dictionary.<br>
+&nbsp;<br>
+This&nbsp;dicionary&nbsp;is&nbsp;usefull&nbsp;to&nbsp;translate&nbsp;from&nbsp;the<br>
+indexes&nbsp;found&nbsp;by&nbsp;regexp&nbsp;in&nbsp;the&nbsp;text&nbsp;string<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a:&nbsp;array&nbsp;of&nbsp;tokens<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dicionary(k,v)&nbsp;where:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v:&nbsp;original&nbsp;index&nbsp;of&nbsp;the&nbsp;token&nbsp;in&nbsp;the&nbsp;sentence<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k:&nbsp;index&nbsp;of&nbsp;the&nbsp;token&nbsp;in&nbsp;the&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-firstLetterUpperCase"><strong>firstLetterUpperCase</strong></a>(s)</dt><dd><tt>Indetifies&nbsp;the&nbsp;tokens&nbsp;with&nbsp;First&nbsp;Letter&nbsp;Upper&nbsp;Case.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s:&nbsp;2D&nbsp;array&nbsp;that&nbsp;represents&nbsp;a&nbsp;sentence&nbsp;in&nbsp;the&nbsp;GloboQuotes&nbsp;format<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;token&nbsp;that&nbsp;starts&nbsp;with&nbsp;upper&nbsp;letter&nbsp;case.</tt></dd></dl>
+ <dl><dt><a name="-quotationEnd"><strong>quotationEnd</strong></a>(s, qs)</dt><dd><tt>Creates&nbsp;a&nbsp;1D&nbsp;array&nbsp;with&nbsp;Quotation&nbsp;End&nbsp;indicators.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;array&nbsp;qe(Quotation&nbsp;End)&nbsp;filled&nbsp;as&nbsp;follow:<br>
+If&nbsp;the&nbsp;token&nbsp;in&nbsp;the&nbsp;i-th&nbsp;line&nbsp;is&nbsp;the&nbsp;end&nbsp;of&nbsp;a&nbsp;quotation,<br>
+qe[i]&nbsp;=&nbsp;'E'.&nbsp;Otherwise,&nbsp;qe[i]&nbsp;=&nbsp;'-'<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s:&nbsp;2D&nbsp;array&nbsp;that&nbsp;represents&nbsp;a&nbsp;sentence&nbsp;in&nbsp;the&nbsp;GloboQuotes&nbsp;format<br>
+&nbsp;&nbsp;&nbsp;&nbsp;qs:&nbsp;1D&nbsp;array&nbsp;with&nbsp;the&nbsp;quotation&nbsp;start&nbsp;annotation.&nbsp;Must&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seen&nbsp;as&nbsp;an&nbsp;additional&nbsp;column&nbsp;of&nbsp;s.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;quotation&nbsp;end.</tt></dd></dl>
+ <dl><dt><a name="-quotationStart"><strong>quotationStart</strong></a>(s)</dt><dd><tt>Indetifies&nbsp;the&nbsp;quotatins'&nbsp;start&nbsp;by&nbsp;regexp&nbsp;patterns.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s:&nbsp;2D&nbsp;array&nbsp;that&nbsp;represents&nbsp;a&nbsp;sentence&nbsp;in&nbsp;the&nbsp;GloboQuotes&nbsp;format<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;quotation&nbsp;start.</tt></dd></dl>
+ <dl><dt><a name="-quoteBounds"><strong>quoteBounds</strong></a>(qs, qe)</dt><dd><tt>Creates&nbsp;a&nbsp;1D&nbsp;array&nbsp;with&nbsp;Quotation&nbsp;Bounds&nbsp;indicators.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;qs:&nbsp;1D&nbsp;array&nbsp;with&nbsp;the&nbsp;quotation&nbsp;start&nbsp;annotation.&nbsp;An<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'S'&nbsp;represents&nbsp;a&nbsp;start&nbsp;and&nbsp;'-'&nbsp;otherwise.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;qe:&nbsp;1D&nbsp;array&nbsp;with&nbsp;the&nbsp;quotation&nbsp;end&nbsp;annotation.&nbsp;An<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'E'&nbsp;represents&nbsp;an&nbsp;end&nbsp;and&nbsp;'-'&nbsp;otherwise.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;belongs&nbsp;to&nbsp;a&nbsp;quotation,&nbsp;marked&nbsp;with&nbsp;'q'.&nbsp;If&nbsp;not,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;position&nbsp;contains&nbsp;'-'.</tt></dd></dl>
+ <dl><dt><a name="-verbSpeechNeighb"><strong>verbSpeechNeighb</strong></a>(s)</dt><dd><tt>Indetifies&nbsp;the&nbsp;Verb&nbsp;of&nbsp;Speech&nbsp;Neighbourhood.<br>
+&nbsp;<br>
+Assigns&nbsp;a&nbsp;1&nbsp;to&nbsp;each&nbsp;verb&nbsp;of&nbsp;speech&nbsp;and&nbsp;also&nbsp;to&nbsp;its&nbsp;four&nbsp;closest&nbsp;tokens.&nbsp;<br>
+Otherwise,&nbsp;assigns&nbsp;a&nbsp;0&nbsp;to&nbsp;the&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s:&nbsp;2D&nbsp;array&nbsp;that&nbsp;represents&nbsp;a&nbsp;sentence&nbsp;in&nbsp;the&nbsp;GloboQuotes&nbsp;format<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;1D&nbsp;array&nbsp;that&nbsp;indicates&nbsp;if&nbsp;the&nbsp;i-th&nbsp;position&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;verb&nbsp;of&nbsp;speech&nbsp;neighborhood.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Rafael&nbsp;Reis&nbsp;&lt;rafael2reis@gmail.com&gt;</td></tr></table>
+</body></html>

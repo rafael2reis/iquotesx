@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module qextractor.metrics.metrics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="qextractor.html"><font color="#ffffff">qextractor</font></a>.<a href="qextractor.metrics.html"><font color="#ffffff">metrics</font></a>.metrics</strong></big></big> (version 1.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/rafaelreis/workspace/python/projetofinal/qextractor/metrics/metrics.py">/Users/rafaelreis/workspace/python/projetofinal/qextractor/metrics/metrics.py</a></font></td></tr></table>
+    <p><tt>metrics&nbsp;module&nbsp;-&nbsp;Functions&nbsp;to&nbsp;evaluate&nbsp;the&nbsp;quality&nbsp;and&nbsp;performance&nbsp;of&nbsp;a&nbsp;model</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-search"><strong>search</strong></a>(r, y)</dt><dd><tt>Auxiliary&nbsp;function&nbsp;that&nbsp;search&nbsp;for&nbsp;a&nbsp;quotation.Row&nbsp;in&nbsp;the&nbsp;y&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;has&nbsp;the&nbsp;same&nbsp;start&nbsp;and&nbsp;end&nbsp;times&nbsp;of&nbsp;r.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r:&nbsp;A&nbsp;quotation.Row&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;A&nbsp;list&nbsp;of&nbsp;quotation.Row&nbsp;objects<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;object&nbsp;in&nbsp;y&nbsp;with&nbsp;the&nbsp;same&nbsp;start&nbsp;and&nbsp;end&nbsp;times&nbsp;that&nbsp;r.&nbsp;None,&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-show"><strong>show</strong></a>(w, train, test, argmax, epoch)</dt><dd><tt>Print&nbsp;the&nbsp;metrics&nbsp;Precision&nbsp;and&nbsp;Recall&nbsp;for&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;train&nbsp;and&nbsp;test&nbsp;set.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;w:&nbsp;The&nbsp;model&nbsp;already&nbsp;trainned<br>
+&nbsp;&nbsp;&nbsp;&nbsp;train:&nbsp;The&nbsp;train&nbsp;dataset<br>
+&nbsp;&nbsp;&nbsp;&nbsp;test:&nbsp;The&nbsp;test&nbsp;dataset<br>
+&nbsp;&nbsp;&nbsp;&nbsp;argmax:&nbsp;The&nbsp;function&nbsp;used&nbsp;to&nbsp;predict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;epoch:&nbsp;An&nbsp;index&nbsp;to&nbsp;be&nbsp;displayed&nbsp;at&nbsp;the&nbsp;line&nbsp;beginning</tt></dd></dl>
+ <dl><dt><a name="-validate"><strong>validate</strong></a>(w, dataset, argmax)</dt><dd><tt>Validates&nbsp;a&nbsp;model&nbsp;w&nbsp;based&nbsp;on&nbsp;a&nbsp;dataset.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;w:&nbsp;The&nbsp;model&nbsp;already&nbsp;trainned<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dataset:&nbsp;The&nbsp;data&nbsp;to&nbsp;be&nbsp;validated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;argmax:&nbsp;The&nbsp;function&nbsp;used&nbsp;to&nbsp;predict<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;tuple&nbsp;composed&nbsp;by&nbsp;the&nbsp;metrics&nbsp;Precision&nbsp;and&nbsp;Recall</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Rafael&nbsp;Reis&nbsp;&lt;rafael2reis@gmail.com&gt;</td></tr></table>
+</body></html>

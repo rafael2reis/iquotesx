@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module qextractor.preprocessing.globoquotes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="qextractor.html"><font color="#ffffff">qextractor</font></a>.<a href="qextractor.preprocessing.html"><font color="#ffffff">preprocessing</font></a>.globoquotes</strong></big></big> (version 1.0)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/rafaelreis/workspace/python/projetofinal/qextractor/preprocessing/globoquotes.py">/Users/rafaelreis/workspace/python/projetofinal/qextractor/preprocessing/globoquotes.py</a></font></td></tr></table>
+    <p><tt>globoquotes&nbsp;module&nbsp;-&nbsp;Classes&nbsp;and&nbsp;functions&nbsp;to&nbsp;read&nbsp;and&nbsp;process&nbsp;<a href="#GloboQuotes">GloboQuotes</a>&nbsp;corpus.<br>
+&nbsp;<br>
+Each&nbsp;line&nbsp;of&nbsp;the&nbsp;corpus&nbsp;must&nbsp;be&nbsp;on&nbsp;the&nbsp;following&nbsp;format:<br>
+&nbsp;<br>
+[features&nbsp;=&nbsp;word,&nbsp;pos,&nbsp;np,&nbsp;ne,&nbsp;ck,&nbsp;clause,&nbsp;gpq,&nbsp;coref,&nbsp;gquotestart,&nbsp;gquoteend,&nbsp;gquote]</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="qextractor.preprocessing.globoquotes.html#GloboQuotes">GloboQuotes</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GloboQuotes">class <strong>GloboQuotes</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GloboQuotes-__init__"><strong>__init__</strong></a>(self, file='./qextractor/data/corpus-globocom-cv.txt')</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-getIndex"><strong>getIndex</strong></a>(line)</dt><dd><tt>Returns&nbsp;the&nbsp;piece&nbsp;(title&nbsp;or&nbsp;body)&nbsp;index.&nbsp;<br>
+Each&nbsp;title&nbsp;or&nbsp;body's&nbsp;feed&nbsp;starts&nbsp;with&nbsp;a&nbsp;line&nbsp;#\d+</tt></dd></dl>
+ <dl><dt><a name="-isNewBody"><strong>isNewBody</strong></a>(line)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;given&nbsp;line&nbsp;starts&nbsp;a&nbsp;new&nbsp;feed&nbsp;Body</tt></dd></dl>
+ <dl><dt><a name="-isNewTitle"><strong>isNewTitle</strong></a>(line)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;given&nbsp;line&nbsp;starts&nbsp;a&nbsp;new&nbsp;feed&nbsp;Title</tt></dd></dl>
+ <dl><dt><a name="-load"><strong>load</strong></a>(file='./qextractor/data/corpus-globocom-cv.txt')</dt><dd><tt>Returns&nbsp;an&nbsp;3-dim&nbsp;array&nbsp;that&nbsp;stores&nbsp;the&nbsp;"body"&nbsp;feeds&nbsp;from&nbsp;a&nbsp;file&nbsp;in&nbsp;the&nbsp;<a href="#GloboQuotes">GloboQuotes</a>&nbsp;format.&nbsp;<br>
+Each&nbsp;element&nbsp;of&nbsp;the&nbsp;array&nbsp;is&nbsp;given&nbsp;by&nbsp;corpus[x][y][z],&nbsp;where:<br>
+x:&nbsp;is&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;sentence<br>
+y:&nbsp;is&nbsp;the&nbsp;index&nbsp;of&nbsp;a&nbsp;line&nbsp;in&nbsp;the&nbsp;x-th&nbsp;sentence<br>
+z:&nbsp;is&nbsp;the&nbsp;index&nbsp;of&nbsp;a&nbsp;feature&nbsp;of&nbsp;the&nbsp;y-th&nbsp;line&nbsp;of&nbsp;the&nbsp;x-th&nbsp;sentence<br>
+&nbsp;<br>
+It&nbsp;discards&nbsp;the&nbsp;feed's&nbsp;titles.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>GLOBOQUOTES_FILE</strong> = './qextractor/data/corpus-globocom-cv.txt'<br>
+<strong>NE</strong> = 3<br>
+<strong>POS</strong> = 1</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Rafael&nbsp;Reis&nbsp;&lt;rafael2reis@gmail.com&gt;</td></tr></table>
+</body></html>
