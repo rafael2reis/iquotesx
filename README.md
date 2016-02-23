@@ -1,8 +1,10 @@
 # iqextractor
 Indirect Quotation Extraction for Portuguese
 
-# Run
+## Run
 
-Just type::
+Just type:
 
-  python -m qextractor.application
+	  python -m qextractor.application
+
+
