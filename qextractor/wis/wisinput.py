@@ -33,14 +33,16 @@ def interval(qb, index = 0):
     length = len(qb)
     inQuote = False
     s, e = 0, 0
+    quoteIndex = -1
     for i in range(length):
         #print(i, qb[i])
-        if qb[i] == 'q':
+        if qb[i] != '-':
             if not inQuote:
                 s = i
                 inQuote = True
+                quoteIndex = qb[i]
             elif ((i + 1 >= length) 
-                    or (qb[i + 1] == 'O')):
+                    or (qb[i + 1] != quoteIndex)):
                 e = i
                 inQuote = False
                 intervals.append( (s, e) )
@@ -94,6 +96,63 @@ def coref(s, quotes, corefIndex):
         corefLabels.append(labels)
 
     return coref, corefLabels
+
+def candidates(s, depIndex=2):
+    intervals = []
+    coref = []
+    corefLabels = []
+
+    length = len(s)
+    # The candidates will be intervals of quotes or authors
+    candidates = scanCandidates(s, depIndex)
+
+    # Generate the combination of each
+    for cand in candidates:
+        for x in cand:
+            intervals.append(x)
+            autInterval = []
+            autLabels = []
+
+            for y in cand:
+                if x != y:
+                    autInterval.append(y)
+                    autLabels.append( s[ y[0] ][depIndex] )
+            coref.append(autInterval)
+            corefLabels.append(autLabels)
+
+    return intervals, coref, corefLabels
+
+def scanCandidates(s, depIndex=2):
+    candidates = []
+    length = len(s)
+    b, e = 0, 0
+    lastLabel = '-'
+    rootIndex = ''
+    c = []
+
+    for i in range(length):
+        if s[i][depIndex] != '-':
+            if s[i][depIndex][-1] != rootIndex and rootIndex != '':
+                candidates.append(c)
+                c = []
+            rootIndex = s[i][depIndex][-1]
+
+            if s[i][depIndex][:4] != 'Root':
+                if s[i][depIndex] != lastLabel:
+                    b = i
+                if i + 1 < length and s[i + 1][depIndex] != s[i][depIndex]:
+                    e = i
+                    c.append( (b, e) )
+                    b, e = 0, 0
+
+            lastLabel = s[i][depIndex]
+        else:
+            lastLabel = '-'
+
+        if (i + 1 >= length):
+            candidates.append(c)
+
+    return candidates
 
 def corefAnnotated(s, quotes, corefIndex, gpqIndex):
     """Searches for the correct coreferences of the quotes given.
