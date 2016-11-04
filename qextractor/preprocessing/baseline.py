@@ -12,15 +12,19 @@ __author__ = "Rafael Reis <rafael2reis@gmail.com>"
 import re
 #import globoquotes
 
+CORPUS_DEP_INDEX = 2 # Index of Dependency Column in Corpus
+CORPUS_POS_INDEX = 1
+
 def boundedChunk(s):
     """Indetifies the Bounded Chunk.
 
-    Assigns a 1 to the three quotation marks ' " - and also to all 
-    the tokens between them, whenever there are more than three 
-    tokens between the quotation marks. Otherwise, assigns a 0 to the token.
+    Assigns a 1 to the tokens that are part of
+    a possible quotation. 
+    
+    Otherwise, assigns a 0 to the token.
 
     Args:
-        s: 2D array that represents a sentence in the GloboQuotes format
+        s: 2D array that represents a sentence in the BosqueQuotes format
     Returns:
         An 1D array that indicates if the i-th position is
         a bounded chunk.
@@ -29,40 +33,11 @@ def boundedChunk(s):
 
     a = [ e[0] for e in s ]
 
-    text, dicIndex = detoken(a)
-
-    #print(text)
-
-    p1 = re.compile(r"\"( \w+?){3}.*? \"", re.U)
-    p2 = re.compile(r"\'( \w+?){3}.*? \'", re.U)
-    p3 = re.compile(r"\-( \w+?){3}.*? \-", re.U)
-
-    for m in re.finditer(p1, text):
+    for t in s:
         #print(m.start(0), m.end(0))
         #print(m.group(0))
-        i = dicIndex[m.start(0)]
-        end = dicIndex[m.end(0)-1]
-        while i < end:
+        if s[CORPUS_DEP_INDEX] != '-' and s[CORPUS_DEP_INDEX][:4] != 'Root':
             bc[i] = 1
-            i += 1
-
-    for m in re.finditer(p2, text):
-        #print(m.start(0), m.end(0))
-        #print(m.group(0))
-        i = dicIndex[m.start(0)]
-        end = dicIndex[m.end(0)-1]
-        while i < end:
-            bc[i] = 1
-            i += 1
-
-    for m in re.finditer(p3, text):
-        #print(m.start(0), m.end(0))
-        #print(m.group(0))
-        i = dicIndex[m.start(0)]
-        end = dicIndex[m.end(0)-1]
-        while i < end:
-            bc[i] = 1
-            i += 1
 
     return bc
 
@@ -98,13 +73,12 @@ def verbSpeechNeighb(s):
         An 1D array that indicates if the i-th position is
         a verb of speech neighborhood.
     """
-    posIndex = 1
     vsn = [ 0 for e in s ]
 
     n = len(s)
 
     for i in range(n):
-        if s[i][posIndex] == 'VSAY':
+        if s[i][CORPUS_POS_INDEX] == 'VSAY':
             vsn[i] = 1
             if i-1 >= 0:
                 vsn[i-1] = 1
@@ -116,74 +90,6 @@ def verbSpeechNeighb(s):
                 vsn[i+2] = 1
 
     return vsn
-
-
-def quotationStart(s):
-    """Indetifies the quotatins' start by regexp patterns.
-
-    Args:
-        s: 2D array that represents a sentence in the GloboQuotes format
-    Returns:
-        An 1D array that indicates if the i-th position is
-        a quotation start.
-    """
-    qs = ["-" for i in range(len(s))]
-
-    a = [ e[0] for e in s ]
-    convertNe(a, s)
-
-    text, dicIndex = detoken(a)
-
-    pattern = re.compile(r"(?=([^\d] [\'\"-] .))")
-
-    for m in re.finditer(pattern, text):
-        qs[ dicIndex[m.end(1)-1] ] = "S"
-
-    pattern = re.compile(r"[\.\?]( #PO#)+ \: (?!#PO#)")
-
-    for m in re.finditer(pattern, text):
-        qs[ dicIndex[m.end(0)] ] = "S"
-
-    return qs
-
-def quotationEnd(s, qs):
-    """Creates a 1D array with Quotation End indicators.
-
-    Returns an array qe(Quotation End) filled as follow:
-    If the token in the i-th line is the end of a quotation,
-    qe[i] = 'E'. Otherwise, qe[i] = '-'
-
-    Args:
-        s: 2D array that represents a sentence in the GloboQuotes format
-        qs: 1D array with the quotation start annotation. Must be
-            seen as an additional column of s.
-
-    Returns:
-        An 1D array that indicates if the i-th position is
-        a quotation end.
-    """
-    qe = ["-" for i in range(len(s))]
-
-    a = [ e[0] for e in s ]
-    convertNe(a, s)
-    convertQuotationStart(a, qs)
-    text, dicIndex = detoken(a)
-
-    #print("baseline.quotationEnd:", text)
-    #print("len(dic):", len(dicIndex))
-
-    applyLabel(qe, pattern=r"(\' #QS#.*?)[\'\n]", text=text, dic=dicIndex, group=1, offset=-1, offDic=-1, label="E")
-    applyLabel(qe, pattern=r"(\" #QS#.*?)[\"\n]", text=text, dic=dicIndex, group=1, offset=-1, offDic=-1, label="E")
-
-    convertProPess(a, s)
-    text, dicIndex = detoken(a)
-    applyLabel(qe, pattern=r"(?=(\- #QS#.*?((?<!ex )\-(?!#PPE#)|$)))", text=text, dic=dicIndex, group=1, offset=-1, offDic=-1, label="E")
-
-    convertQuotationStart(a, qs)
-    text, dicIndex = detoken(a)
-    applyLabel(qe, pattern=r"(?=(#PO# \: #QS#.*?[\.\?])((( #PO#)+ \:)|$))", text=text, dic=dicIndex, group=1, offset=0, offDic=-1, label="E")
-
-    return qe
 
 def applyLabel(q, pattern, text, dic, group, offset, offDic, label):
     p = re.compile(pattern)
@@ -221,31 +127,21 @@ def convert(a, s, transIndex, valueList, label):
         if s[i][transIndex] in valueList:
             a[i] = label
 
-def quoteBounds(qs, qe):
+def quoteBounds(s):
     """Creates a 1D array with Quotation Bounds indicators.
 
     Args:
-        qs: 1D array with the quotation start annotation. An
-            'S' represents a start and '-' otherwise.
-        qe: 1D array with the quotation end annotation. An
-            'E' represents an end and '-' otherwise.
+        s: 2D array that represents a sentence in the BosqueQuotes format
 
     Returns:
         An 1D array that indicates if the i-th position 
         belongs to a quotation, marked with 'q'. If not,
-        the position contains '-'.
+        the position contains 'O'.
     """
     quote = ["O" for i in range(len(qs))]
-    inQuote = False
 
-    for i in range(len(qs)-1, 0, -1):
-        if qe[i] == 'E' and not inQuote:
-            quote[i] = 'q'
-            inQuote = True
-        elif qs[i] == 'S' and inQuote:
-            quote[i] = 'q'
-            inQuote = False
-        elif inQuote:
+    for t in s:
+        if s[CORPUS_DEP_INDEX] != '-' and s[CORPUS_DEP_INDEX][:4] != 'Root':
             quote[i] = 'q'
 
     return quote

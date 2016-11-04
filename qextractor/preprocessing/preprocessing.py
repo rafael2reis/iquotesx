@@ -13,17 +13,17 @@ import re
 import csv
 from pkg_resources import resource_filename
 
-from qextractor.preprocessing import globoquotes
+from qextractor.preprocessing import bosquequotes
 from qextractor.preprocessing import baseline
 from qextractor.preprocessing import verbspeech
 from qextractor.preprocessing import feature
 
 from qextractor.wis import wisinput
 
-INDEX_QB = 10
+INDEX_QB = 4
 
-GLOBOQUOTES_FILE = resource_filename('qextractor', 'data/corpus-globocom-cv.txt')
-GLOBOQUOTES_TEST_FILE = resource_filename('qextractor', 'data/corpus-globocom-test.txt')
+BOSQUE_FILE = resource_filename('qextractor', 'data/corpus-bosquequotes-train.txt')
+BOSQUE_TEST_FILE = resource_filename('qextractor', 'data/corpus-bosquequotes-test.txt')
 
 INPUT_FILE = resource_filename('qextractor', 'data/gen/qextractor_input.csv')
 INPUT_TEST_FILE = resource_filename('qextractor', 'data/gen/qextractor_input_test.csv')
@@ -35,8 +35,8 @@ def createInput(fileName=None, createTest=False):
         fileName: The CSV file that will be created
         createTest: If the preprocessing will be applyed in the test set
     """
-    corpus = globoquotes.load(GLOBOQUOTES_FILE)
-    test = globoquotes.load(GLOBOQUOTES_TEST_FILE)
+    corpus = bosquequotes.load(BOSQUE_FILE)
+    test = bosquequotes.load(BOSQUE_TEST_FILE)
     converter = verbspeech.Converter()
 
     if not fileName:
@@ -53,9 +53,9 @@ def createInput(fileName=None, createTest=False):
     i = 0
     for i in range(len(corpus)):
         s = corpus[i]
-        qs = baseline.quotationStart(s)
-        qe = baseline.quotationEnd(s, qs)
-        qb = baseline.quoteBounds(qs, qe)
+        # qs = baseline.quotationStart(s)
+        # qe = baseline.quotationEnd(s, qs)
+        # qb = baseline.quoteBounds(qs, qe)
 
         converter.vsay(s, tokenIndex = 0, posIndex = 1)
 
@@ -71,10 +71,11 @@ def createInput(fileName=None, createTest=False):
         fluc = baseline.firstLetterUpperCase(s)
 
         #print("Identifying quotes...")
-        quotes = wisinput.interval(qb)
+        # quotes = wisinput.interval(qb)
 
         #print("Identifying coreferences...")
-        coref, labels = wisinput.coref(s, quotes, corefIndex=7)
+        # coref, labels = wisinput.coref(s, quotes, corefIndex=7)
+        quotes, coref, labels = wisinput.candidates(s, depIndex=2)
 
         #print("Creating features...")
         feat = feature.create(s, quotes=quotes, coref=coref, posIndex=1, corefIndex=7, quoteBounds=qb, bc=bc, vsn=vsn, fluc=fluc)
