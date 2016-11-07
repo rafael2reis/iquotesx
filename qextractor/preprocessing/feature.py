@@ -17,13 +17,18 @@ def dummyCoref():
 def create(s, quotes, coref, posIndex, corefIndex, quoteBounds, bc, vsn, fluc, dummy=True):
 	features = []
 
+	print("feature.py s = ", s)
+
 	for i in range(len(quotes)):
 		qs = quotes[i][0]
 		qe = quotes[i][1]
 
+		print("feature.py qs = ", qs, " qe = ", qe)
+
 		features.append([])
 		if dummy:
 			features[i].append(dummyCoref())
+		print("feature.py coref", coref[i])
 		for j in range(len(coref[i])):
 			feat = []
 			c = coref[i][j]
@@ -47,13 +52,13 @@ def create(s, quotes, coref, posIndex, corefIndex, quoteBounds, bc, vsn, fluc, d
 			k = start
 			while k <= end:
 				# 1-Distance:
-				if s[k][corefIndex] != "O" and s[k-1][corefIndex] != s[k][corefIndex]:
+				if s[k][corefIndex] != "-" and s[k-1][corefIndex] != s[k][corefIndex]:
 					dist.add(s[k][corefIndex])
 				# 4-Number of Verb of Speech:
 				if s[k][posIndex] == 'VSAY':
 					vsay += 1
 				# 6-Quote in Between:
-				if quoteBounds[k] == 'q':
+				if quoteBounds[k] != '-':
 					quoteBt = True
 
 				k += 1

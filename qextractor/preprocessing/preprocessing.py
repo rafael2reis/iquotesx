@@ -55,7 +55,7 @@ def createInput(fileName=None, createTest=False):
         s = corpus[i]
         # qs = baseline.quotationStart(s)
         # qe = baseline.quotationEnd(s, qs)
-        # qb = baseline.quoteBounds(qs, qe)
+        qb = baseline.quoteBounds(s)
 
         converter.vsay(s, tokenIndex = 0, posIndex = 1)
 
@@ -78,7 +78,7 @@ def createInput(fileName=None, createTest=False):
         quotes, coref, labels = wisinput.candidates(s, depIndex=2)
 
         #print("Creating features...")
-        feat = feature.create(s, quotes=quotes, coref=coref, posIndex=1, corefIndex=7, quoteBounds=qb, bc=bc, vsn=vsn, fluc=fluc)
+        feat = feature.create(s, quotes=quotes, coref=coref, posIndex=1, corefIndex=3, quoteBounds=qb, bc=bc, vsn=vsn, fluc=fluc)
 
         #print("Binarying features...")
         bfeat = feature.binary(columns, feat)
@@ -92,11 +92,11 @@ def createInput(fileName=None, createTest=False):
         #print("Output: Quotes = ", len(quotesA))
 
         #print("Output: Identifying coreferences...")
-        corefA, labelsA = wisinput.corefAnnotated(s, quotes=quotesA, corefIndex=7, gpqIndex=6)
+        corefA, labelsA = wisinput.corefAnnotated(s, quotes=quotesA, depIndex = 2, corefIndex = 3, quoteIndex = 4)
         #print("Output: Coref = ", len(corefA))
 
-        #print("Output: Creating features...")
-        featA = feature.create(s, quotes=quotesA, coref=corefA, posIndex=1, corefIndex=7, \
+        print("Output: Creating features...")
+        featA = feature.create(s, quotes=quotesA, coref=corefA, posIndex=1, corefIndex=3, \
                 quoteBounds=qbA, bc=bc, vsn=vsn, fluc=fluc, dummy=False)
 
         #print("Output: Binarying features...")

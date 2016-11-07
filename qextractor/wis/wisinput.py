@@ -41,8 +41,9 @@ def interval(qb, index = 0):
                 s = i
                 inQuote = True
                 quoteIndex = qb[i]
-            elif ((i + 1 >= length) 
-                    or (qb[i + 1] != quoteIndex)):
+
+            if (inQuote and ((i + 1 >= length) 
+                    or (qb[i + 1] != quoteIndex))):
                 e = i
                 inQuote = False
                 intervals.append( (s, e) )
@@ -106,19 +107,30 @@ def candidates(s, depIndex=2):
     # The candidates will be intervals of quotes or authors
     candidates = scanCandidates(s, depIndex)
 
+    # print("wisinput.py s = ", s)
+    # print("candidates: ", candidates)
+
     # Generate the combination of each
     for cand in candidates:
+        #print("cand: ", cand)
         for x in cand:
             intervals.append(x)
             autInterval = []
-            autLabels = []
+            autLabels = ["dummy"]
 
             for y in cand:
                 if x != y:
-                    autInterval.append(y)
+                    if y[1] < x[0]:
+                        autInterval.append(y[1])
+                    elif y[0] > x[1]:
+                        autInterval.append(y[0])
                     autLabels.append( s[ y[0] ][depIndex] )
             coref.append(autInterval)
             corefLabels.append(autLabels)
+
+    # print("intervals: ", intervals)
+    # print("coref: ", coref)
+    # print("corefLabels: ", corefLabels)
 
     return intervals, coref, corefLabels
 
@@ -140,7 +152,7 @@ def scanCandidates(s, depIndex=2):
             if s[i][depIndex][:4] != 'Root':
                 if s[i][depIndex] != lastLabel:
                     b = i
-                if i + 1 < length and s[i + 1][depIndex] != s[i][depIndex]:
+                if i + 1 >= length or s[i + 1][depIndex] != s[i][depIndex]:
                     e = i
                     c.append( (b, e) )
                     b, e = 0, 0
@@ -154,47 +166,47 @@ def scanCandidates(s, depIndex=2):
 
     return candidates
 
-def corefAnnotated(s, quotes, corefIndex, gpqIndex):
+def corefAnnotated(s, quotes, depIndex = 2, corefIndex = 3, quoteIndex = 4):
     """Searches for the correct coreferences of the quotes given.
 
-    GPQ is in the format: r(dist)(inc), where:
-        dist: is an integer that is the distance from the quotation to
-            its coreference.
-        inc: + or - signal, indicating if the coref is to the right
-            or to the left from the quotation.
     Args:
         quotes: 2D array, which line having the quotation start and end indexes
-        s: sentence in the GlbooQuotes format
-        qpqIndex: index of GPQ column in the s array
+        s: sentence in the BosqueQuotes format
     Returns:
-        An array with the indexes of the coreferences
+        An array with the indexes of the coreferences. As the coreference
+        could have up to two indexes, the closest index from the quote is
+        the selected.
     """
-    pattern = re.compile(r"r(\d+)([-+])")
 
     index = []
     labels = []
+
+    length = len(s)
+    b = 0
 
     for q in quotes:
         qstart = q[0]
         qend = q[1]
 
-        gpq = s[qstart][gpqIndex]
-        m = re.match(pattern, gpq)
+        qIndex = s[qstart][quoteIndex]
+        inCoref = False
+        for i in range(length):
+            if s[i][corefIndex] == qIndex:
 
-        dist = int(m.group(1))
-        inc = int(m.group(2) + '1')
-        
-        i = qend + 1
-        if inc < 0: i = qstart - 1
+                if not inCoref:
+                    if ((i > qend)
+                            or ((i + 1 >= length) 
+                                or (s[i + 1][corefIndex] != qIndex))):
+                        index.append( [i] )
+                        labels.append( [s[i][depIndex]] )
+                        break
 
-        count = 1
-        while count <= dist:
-            if s[i][corefIndex] != 'O':
-                if count == dist:
-                    index.append([i])
-                    labels.append([s[i][corefIndex]])
-                count += 1
-
-            i += inc
+                    inCoref = True
+                if (inCoref and ((i + 1 >= length) 
+                        or (s[i + 1][corefIndex] != qIndex))):
+                    if i < qstart:
+                        index.append( [i] )
+                        labels.append( [s[i][depIndex]] )
+                        break
 
     return index, labels

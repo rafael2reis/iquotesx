@@ -1,3 +1,8 @@
+"""
+Running the test: on the project root, type:
+
+python -m unittest -v qextractor/preprocessing/tests/test_preprocessing.py
+"""
 import unittest
 
 from pkg_resources import resource_filename

@@ -33,10 +33,10 @@ def boundedChunk(s):
 
     a = [ e[0] for e in s ]
 
-    for t in s:
+    for i in range(len(s)):
         #print(m.start(0), m.end(0))
         #print(m.group(0))
-        if s[CORPUS_DEP_INDEX] != '-' and s[CORPUS_DEP_INDEX][:4] != 'Root':
+        if s[i][CORPUS_DEP_INDEX] != '-' and s[i][CORPUS_DEP_INDEX][:4] != 'Root':
             bc[i] = 1
 
     return bc
@@ -55,6 +55,7 @@ def firstLetterUpperCase(s):
     pattern = re.compile(r"\w+")
 
     for i in range(len(s)):
+        # print("# baseline.py: ", s[i])
         text = s[i][tokenIndex][0]
         if re.match(pattern, text) and text == text.upper():
             uc[i] = 1
@@ -138,10 +139,10 @@ def quoteBounds(s):
         belongs to a quotation, marked with 'q'. If not,
         the position contains 'O'.
     """
-    quote = ["O" for i in range(len(qs))]
+    quote = ["-" for i in range(len(s))]
 
-    for t in s:
-        if s[CORPUS_DEP_INDEX] != '-' and s[CORPUS_DEP_INDEX][:4] != 'Root':
+    for i in range(len(s)):
+        if s[i][CORPUS_DEP_INDEX] != '-' and s[i][CORPUS_DEP_INDEX][:4] != 'Root':
             quote[i] = 'q'
 
     return quote
