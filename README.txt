@@ -16,4 +16,11 @@ Arquivos contidos neste CD:
 Rafael dos Reis Silva - 1421603
 rafael2reis@gmail.com
 
+Execução
+=========
 
+1) Rodar o pré-processamento:
+$ python -m qextractor.preprocessing.tests.test_preprocessing
+
+2) Rodar o treino e o teste:
+$ python -m qextractor.application
